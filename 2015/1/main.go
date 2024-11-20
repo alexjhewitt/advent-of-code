@@ -12,7 +12,8 @@ func main() {
 		panic(err)
 	}
 	floor := 0
-	for _, b := range dat {
+	pos := 0
+	for i, b := range dat {
 		c := fmt.Sprintf("%c", b)
 		fmt.Println(c)
 		if c == "(" {
@@ -26,6 +27,13 @@ func main() {
 			fmt.Println(err)
 			break
 		}
+		if floor == -1 {
+			if pos != 0 {
+				continue
+			}
+			pos = i
+		}
 	}
 	fmt.Printf("Floor level: %d\n", floor)
+	fmt.Println("Position where floor goes to -1: ", pos+1)
 }
