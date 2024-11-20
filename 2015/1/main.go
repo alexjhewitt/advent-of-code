@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 )
@@ -11,7 +12,20 @@ func main() {
 		panic(err)
 	}
 	floor := 0
-	for _, c := range dat {
-		fmt.Printf("%c", c)
+	for _, b := range dat {
+		c := fmt.Sprintf("%c", b)
+		fmt.Println(c)
+		if c == "(" {
+			floor += 1
+		} else if c == ")" {
+			floor -= 1
+		} else {
+			err = errors.New("invalid character detected")
+		}
+		if err != nil {
+			fmt.Println(err)
+			break
+		}
 	}
+	fmt.Printf("Floor level: %d\n", floor)
 }
